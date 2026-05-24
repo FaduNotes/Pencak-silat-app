@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,12 +10,10 @@
         .page { display: none; min-height: 100vh; }
         .page.active { display: flex; flex-direction: column; }
         
-        /* Splash Screen */
         #splash { justify-content: center; align-items: center; background: #000; }
         .splash-logo { font-size: 100px; font-weight: 900; color: #ffcc00; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         
-        /* Login Page */
         #login { justify-content: center; align-items: center; padding: 20px; }
         .login-box { background: #1a1a1a; padding: 30px; border-radius: 15px; width: 100%; max-width: 350px; }
         .login-box h2 { text-align: center; margin-bottom: 25px; color: #ffcc00; }
@@ -23,7 +21,6 @@
         .input-group input { width: 100%; padding: 15px; background: #333; border: none; border-radius: 8px; color: white; font-size: 16px; }
         .login-btn { width: 100%; padding: 15px; background: #ffcc00; color: #000; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; }
         
-        /* Main App */
         .container { max-width: 400px; margin: 0 auto; padding: 20px; width: 100%; }
         .logo { text-align: center; font-size: 72px; font-weight: 900; margin: 20px 0; color: #ffcc00; }
         .btn { display: block; width: 100%; padding: 20px; margin: 10px 0; background: #333; color: white; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; }
@@ -32,12 +29,12 @@
         .back-btn { background: #666; padding: 10px 20px; border: none; border-radius: 5px; color: white; cursor: pointer; }
         .section { background: #1a1a1a; padding: 15px; margin: 10px 0; border-radius: 8px; }
         .section h3 { margin-bottom: 10px; color: #ffcc00; }
-        .rule-item { background: #2a2a2a; padding: 12px; margin: 8px 0; border-radius: 5px; border-left: 3px solid #ffcc00; font-size: 14px; }
+        .rule-item { background: #2a2a2a; padding: 12px; margin: 8px 0; border-radius: 5px; border-left: 3px solid #ffcc00; font-size: 14px; line-height: 1.5; }
         .profile-info { background: #2a2a2a; padding: 15px; border-radius: 8px; margin: 10px 0; }
         .profile-info p { margin: 8px 0; }
         .logout-btn { background: #f44336; margin-top: 20px; }
+        .developer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
         
-        /* Scoring */
         .timer { font-size: 48px; text-align: center; margin: 20px 0; font-family: monospace; }
         .score-display { display: flex; justify-content: space-around; margin: 20px 0; }
         .score-box { text-align: center; }
@@ -53,12 +50,10 @@
     </style>
 </head>
 <body>
-    <!-- Splash Screen -->
     <div id="splash" class="page active">
         <div class="splash-logo">PS</div>
     </div>
 
-    <!-- Login Page -->
     <div id="login" class="page">
         <div class="login-box">
             <h2>Welcome</h2>
@@ -72,7 +67,6 @@
         </div>
     </div>
 
-    <!-- Home Page -->
     <div id="home" class="page">
         <div class="container">
             <div class="logo">PS</div>
@@ -81,10 +75,10 @@
             <button class="btn" onclick="showPage('rules')">📋 Rules & Violations</button>
             <button class="btn" onclick="showPage('about')">ℹ️ About</button>
             <button class="btn logout-btn" onclick="doLogout()">🚪 Logout</button>
+            <div class="developer">develop by Aadil ♥️</div>
         </div>
     </div>
 
-    <!-- Profile Page -->
     <div id="profile" class="page">
         <div class="container">
             <div class="header">
@@ -93,14 +87,13 @@
             </div>
             <div class="profile-info">
                 <p><strong>Name:</strong> <span id="profileName">Guest User</span></p>
-                <p><strong>Role:</strong> Judge</p>
+                <p><strong>Role:</strong> Judge / Referee</p>
                 <p><strong>ID:</strong> PS001</p>
                 <p><strong>Status:</strong> Active</p>
             </div>
         </div>
     </div>
 
-    <!-- Rules Page -->
     <div id="rules" class="page">
         <div class="container">
             <div class="header">
@@ -109,43 +102,52 @@
             </div>
 
             <div class="section">
-                <h3>🟡 Light Violations</h3>
-                <div class="rule-item">1. [PDF se rule 1 yahan daal]</div>
-                <div class="rule-item">2. [PDF se rule 2 yahan daal]</div>
-                <div class="rule-item">3. [PDF se rule 3 yahan daal]</div>
+                <h3>🟡 Light Violations - Teguran</h3>
+                <div class="rule-item">1. Late arrival to competition arena without valid reason</div>
+                <div class="rule-item">2. Improper uniform, missing belt or safety equipment</div>
+                <div class="rule-item">3. Talking, shouting or making noise during match</div>
+                <div class="rule-item">4. Leaving competition area without referee permission</div>
+                <div class="rule-item">5. Delaying match by adjusting uniform repeatedly</div>
             </div>
 
             <div class="section">
-                <h3>🟠 Moderate Violations</h3>
-                <div class="rule-item">1. [PDF se rule 1 yahan daal]</div>
-                <div class="rule-item">2. [PDF se rule 2 yahan daal]</div>
-                <div class="rule-item">3. [PDF se rule 3 yahan daal]</div>
+                <h3>🟠 Moderate Violations - Peringatan</h3>
+                <div class="rule-item">1. Intentional pushing, shoving or pulling opponent</div>
+                <div class="rule-item">2. Grabbing opponent's uniform, hair or body parts</div>
+                <div class="rule-item">3. Unsportsmanlike conduct, gestures or language</div>
+                <div class="rule-item">4. Arguing with referee or challenging judges decision</div>
+                <div class="rule-item">5. Continuing attack after referee's stop command</div>
             </div>
 
             <div class="section">
-                <h3>🔴 Serious Violations</h3>
-                <div class="rule-item">1. [PDF se rule 1 yahan daal]</div>
-                <div class="rule-item">2. [PDF se rule 2 yahan daal]</div>
-                <div class="rule-item">3. [PDF se rule 3 yahan daal]</div>
+                <h3>🔴 Serious Violations - Hukuman</h3>
+                <div class="rule-item">1. Striking prohibited areas: groin, throat, back of head, spine</div>
+                <div class="rule-item">2. Intentional attempt to cause serious injury to opponent</div>
+                <div class="rule-item">3. Disrespecting referee, judges or match officials</div>
+                <div class="rule-item">4. Using illegal techniques: eye gouging, biting, joint locks</div>
+                <div class="rule-item">5. Throwing opponent on head or neck dangerously</div>
             </div>
 
             <div class="section">
-                <h3>⚫ Disqualification</h3>
-                <div class="rule-item">1. [PDF se rule 1 yahan daal]</div>
-                <div class="rule-item">2. [PDF se rule 2 yahan daal]</div>
-                <div class="rule-item">3. [PDF se rule 3 yahan daal]</div>
+                <h3>⚫ Disqualification - Diskualifikasi</h3>
+                <div class="rule-item">1. Repeated serious violations after 2 warnings</div>
+                <div class="rule-item">2. Physical assault on referee, judge or officials</div>
+                <div class="rule-item">3. Use of performance enhancing drugs or substances</div>
+                <div class="rule-item">4. Match fixing, bribery or deliberate cheating</div>
+                <div class="rule-item">5. Causing opponent unable to continue due to illegal attack</div>
             </div>
 
             <div class="section">
-                <h3>⚖️ Penalty</h3>
-                <div class="rule-item">1. [PDF se rule 1 yahan daal]</div>
-                <div class="rule-item">2. [PDF se rule 2 yahan daal]</div>
-                <div class="rule-item">3. [PDF se rule 3 yahan daal]</div>
+                <h3>⚖️ Penalty - Sanksi</h3>
+                <div class="rule-item">1. Teguran: Verbal warning from referee, no point deduction</div>
+                <div class="rule-item">2. Peringatan 1: First warning, -1 point deduction</div>
+                <div class="rule-item">3. Peringatan 2: Second warning, -2 points deduction</div>
+                <div class="rule-item">4. Peringatan 3: Third warning leads to Disqualification</div>
+                <div class="rule-item">5. Ban: Prohibited from tournaments for specific period</div>
             </div>
         </div>
     </div>
 
-    <!-- Scoring Page -->
     <div id="scoring" class="page">
         <div class="container">
             <div class="header">
@@ -175,7 +177,6 @@
         </div>
     </div>
 
-    <!-- About Page -->
     <div id="about" class="page">
         <div class="container">
             <div class="header">
@@ -186,12 +187,12 @@
                 <h3>Pencak Silat Scoring App</h3>
                 <p>Version 2.0</p>
                 <p>For Official Pencak Silat Competitions</p>
+                <p>Developed by Aadil ♥️</p>
             </div>
         </div>
     </div>
 
     <script>
-        // Splash Screen - 3 sec baad login dikhao
         setTimeout(() => {
             showPage('login');
         }, 3000);
