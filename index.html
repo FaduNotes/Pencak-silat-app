@@ -1,482 +1,264 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pencak Silat Scoring App</title>
-
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
-}
-
-body{
-background:#0d1117;
-color:white;
-overflow-x:hidden;
-}
-
-/* SPLASH SCREEN */
-
-#splash{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100vh;
-background:#000;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-z-index:9999;
-animation:hideSplash 3s forwards;
-}
-
-#splash img{
-width:130px;
-height:130px;
-border-radius:50%;
-border:4px solid orange;
-margin-bottom:20px;
-}
-
-#splash h1{
-font-size:34px;
-color:orange;
-}
-
-@keyframes hideSplash{
-0%{opacity:1;}
-90%{opacity:1;}
-100%{
-opacity:0;
-visibility:hidden;
-}
-}
-
-/* LOGIN */
-
-#loginPage{
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-padding:20px;
-}
-
-.login-box{
-background:#161b22;
-padding:30px;
-border-radius:20px;
-width:100%;
-max-width:400px;
-border:2px solid #30363d;
-}
-
-.login-box h2{
-text-align:center;
-margin-bottom:20px;
-color:orange;
-}
-
-input{
-width:100%;
-padding:14px;
-margin:10px 0;
-background:#0d1117;
-border:2px solid #30363d;
-border-radius:12px;
-color:white;
-font-size:16px;
-}
-
-button{
-width:100%;
-padding:14px;
-border:none;
-border-radius:12px;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-margin-top:10px;
-}
-
-.login-btn{
-background:#238636;
-color:white;
-}
-
-/* MAIN APP */
-
-#app{
-display:none;
-padding:15px;
-}
-
-.header{
-background:#161b22;
-padding:20px;
-border-radius:20px;
-text-align:center;
-margin-bottom:15px;
-border:2px solid #30363d;
-}
-
-.header h1{
-color:orange;
-font-size:30px;
-}
-
-.menu{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-margin-bottom:15px;
-}
-
-.card{
-background:#161b22;
-padding:20px;
-border-radius:18px;
-border:2px solid #30363d;
-text-align:center;
-cursor:pointer;
-transition:0.3s;
-}
-
-.card:hover{
-transform:scale(1.03);
-border-color:orange;
-}
-
-.card h2{
-font-size:24px;
-margin-top:10px;
-color:orange;
-}
-
-/* SECTION */
-
-.section{
-display:none;
-background:#161b22;
-padding:20px;
-border-radius:20px;
-border:2px solid #30363d;
-margin-top:15px;
-}
-
-.section h2{
-color:orange;
-margin-bottom:15px;
-text-align:center;
-}
-
-.rule-box{
-background:#0d1117;
-padding:15px;
-border-radius:15px;
-margin-bottom:12px;
-border-left:5px solid orange;
-}
-
-.rule-box h3{
-margin-bottom:8px;
-color:#58a6ff;
-}
-
-.back-btn{
-background:#da3633;
-color:white;
-margin-top:15px;
-}
-
-.scoring-btn{
-background:#1f6feb;
-color:white;
-}
-
-.profile-box{
-text-align:center;
-}
-
-.profile-box img{
-width:120px;
-height:120px;
-border-radius:50%;
-border:4px solid orange;
-margin-bottom:15px;
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pencak Silat App</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #0a0a0a; color: white; }
+        .page { display: none; min-height: 100vh; }
+        .page.active { display: flex; flex-direction: column; }
+        
+        /* Splash Screen */
+        #splash { justify-content: center; align-items: center; background: #000; }
+        .splash-logo { font-size: 100px; font-weight: 900; color: #ffcc00; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        
+        /* Login Page */
+        #login { justify-content: center; align-items: center; padding: 20px; }
+        .login-box { background: #1a1a1a; padding: 30px; border-radius: 15px; width: 100%; max-width: 350px; }
+        .login-box h2 { text-align: center; margin-bottom: 25px; color: #ffcc00; }
+        .input-group { margin-bottom: 15px; }
+        .input-group input { width: 100%; padding: 15px; background: #333; border: none; border-radius: 8px; color: white; font-size: 16px; }
+        .login-btn { width: 100%; padding: 15px; background: #ffcc00; color: #000; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; }
+        
+        /* Main App */
+        .container { max-width: 400px; margin: 0 auto; padding: 20px; width: 100%; }
+        .logo { text-align: center; font-size: 72px; font-weight: 900; margin: 20px 0; color: #ffcc00; }
+        .btn { display: block; width: 100%; padding: 20px; margin: 10px 0; background: #333; color: white; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; }
+        .btn:active { background: #555; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-top: 20px; }
+        .back-btn { background: #666; padding: 10px 20px; border: none; border-radius: 5px; color: white; cursor: pointer; }
+        .section { background: #1a1a1a; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .section h3 { margin-bottom: 10px; color: #ffcc00; }
+        .rule-item { background: #2a2a2a; padding: 12px; margin: 8px 0; border-radius: 5px; border-left: 3px solid #ffcc00; font-size: 14px; }
+        .profile-info { background: #2a2a2a; padding: 15px; border-radius: 8px; margin: 10px 0; }
+        .profile-info p { margin: 8px 0; }
+        .logout-btn { background: #f44336; margin-top: 20px; }
+        
+        /* Scoring */
+        .timer { font-size: 48px; text-align: center; margin: 20px 0; font-family: monospace; }
+        .score-display { display: flex; justify-content: space-around; margin: 20px 0; }
+        .score-box { text-align: center; }
+        .score-box .name { font-size: 14px; margin-bottom: 5px; }
+        .score-box .score { font-size: 36px; font-weight: bold; }
+        .red { color: #ff4444; }
+        .blue { color: #4444ff; }
+        .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+        .control-btn { padding: 15px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
+        .start-btn { background: #4CAF50; color: white; }
+        .stop-btn { background: #f44336; color: white; }
+        .judge-btn { background: #2196F3; color: white; padding: 10px; margin: 5px 0; width: 100%; }
+    </style>
 </head>
-
 <body>
-
-<!-- SPLASH -->
-
-<div id="splash">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Logo_placeholder.png">
-
-<h1>PENCAK SILAT</h1>
-
-</div>
-
-<!-- LOGIN PAGE -->
-
-<div id="loginPage">
-
-<div class="login-box">
-
-<h2>LOGIN</h2>
-
-<input type="text" id="username" placeholder="Enter Username">
-
-<input type="password" id="password" placeholder="Enter Password">
-
-<button class="login-btn" onclick="login()">LOGIN</button>
-
-</div>
-
-</div>
-
-<!-- MAIN APP -->
-
-<div id="app">
-
-<div class="header">
-
-<h1>PENCAK SILAT APP</h1>
-
-<p>Professional Jury & Rules Application</p>
-
-</div>
-
-<div class="menu">
-
-<div class="card" onclick="openSection('profile')">
-<h2>👤 Profile</h2>
-</div>
-
-<div class="card" onclick="openSection('rules')">
-<h2>📜 Rules</h2>
-</div>
-
-<div class="card" onclick="openSection('scoring')">
-<h2>🥊 Scoring</h2>
-</div>
-
-<div class="card" onclick="openSection('about')">
-<h2>ℹ️ About</h2>
-</div>
-
-</div>
-
-<!-- PROFILE -->
-
-<div class="section" id="profile">
-
-<h2>PROFILE</h2>
-
-<div class="profile-box">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png">
-
-<h3>Jury Member</h3>
-
-<p>Name: Admin User</p>
-
-<p>Role: Official Jury</p>
-
-<p>Game: Pencak Silat</p>
-
-</div>
-
-<button class="back-btn" onclick="closeSections()">BACK</button>
-
-</div>
-
-<!-- RULES -->
-
-<div class="section" id="rules">
-
-<h2>RULES SECTION</h2>
-
-<div class="rule-box">
-<h3>🟢 Light Violations</h3>
-<p>
-• Passive fighting<br>
-• Small illegal contact<br>
-• Delaying competition<br>
-• Exiting area accidentally
-</p>
-</div>
-
-<div class="rule-box">
-<h3>🟡 Moderate Violations</h3>
-<p>
-• Hard pushing<br>
-• Grabbing too long<br>
-• Repeated illegal attack<br>
-• Unsportsmanlike action
-</p>
-</div>
-
-<div class="rule-box">
-<h3>🔴 Serious Violations</h3>
-<p>
-• Dangerous attack<br>
-• Intentional injury<br>
-• Attack after stop command<br>
-• Violent behavior
-</p>
-</div>
-
-<div class="rule-box">
-<h3>⚫ Disqualification</h3>
-<p>
-• Severe misconduct<br>
-• Refusing referee command<br>
-• Repeated serious foul<br>
-• Dangerous unsporting conduct
-</p>
-</div>
-
-<div class="rule-box">
-<h3>🚫 Penalty</h3>
-<p>
-• Warning deduction<br>
-• Point deduction<br>
-• Technical penalty<br>
-• Administrative sanction
-</p>
-</div>
-
-<button class="back-btn" onclick="closeSections()">BACK</button>
-
-</div>
-
-<!-- SCORING -->
-
-<div class="section" id="scoring">
-
-<h2>SCORING SYSTEM</h2>
-
-<p style="margin-bottom:15px;">
-Paste your full Jury Panel scoring code here.
-</p>
-
-<textarea style="
-width:100%;
-height:300px;
-background:#0d1117;
-color:white;
-border:2px solid #30363d;
-border-radius:15px;
-padding:15px;
-font-size:14px;
-">
-
-PASTE YOUR FULL SCORING CODE HERE
-
-</textarea>
-
-<button class="scoring-btn">
-OPEN SCORING PANEL
-</button>
-
-<button class="back-btn" onclick="closeSections()">BACK</button>
-
-</div>
-
-<!-- ABOUT -->
-
-<div class="section" id="about">
-
-<h2>ABOUT APP</h2>
-
-<p>
-This application is made for Professional Pencak Silat Jury & Match Management.
-</p>
-
-<br>
-
-<p>
-Features:
-</p>
-
-<p>
-✔ Login System<br>
-✔ Splash Logo Animation<br>
-✔ Rules Section<br>
-✔ Jury Scoring System<br>
-✔ Modern UI Design
-</p>
-
-<button class="back-btn" onclick="closeSections()">BACK</button>
-
-</div>
-
-</div>
-
-<script>
-
-/* SHOW LOGIN AFTER 3 SEC */
-
-setTimeout(()=>{
-document.getElementById("loginPage").style.display="flex";
-},3000);
-
-/* LOGIN */
-
-function login(){
-
-let user=document.getElementById("username").value;
-let pass=document.getElementById("password").value;
-
-if(user==="admin" && pass==="1234"){
-
-document.getElementById("loginPage").style.display="none";
-
-document.getElementById("app").style.display="block";
-
-}
-else{
-
-alert("Wrong Username or Password");
-
-}
-
-}
-
-/* OPEN SECTION */
-
-function openSection(id){
-
-closeSections();
-
-document.getElementById(id).style.display="block";
-
-}
-
-/* CLOSE */
-
-function closeSections(){
-
-let sections=document.querySelectorAll(".section");
-
-sections.forEach(section=>{
-section.style.display="none";
-});
-
-}
-
-</script>
-
+    <!-- Splash Screen -->
+    <div id="splash" class="page active">
+        <div class="splash-logo">PS</div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login" class="page">
+        <div class="login-box">
+            <h2>Welcome</h2>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Username">
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Password">
+            </div>
+            <button class="login-btn" onclick="doLogin()">Login</button>
+        </div>
+    </div>
+
+    <!-- Home Page -->
+    <div id="home" class="page">
+        <div class="container">
+            <div class="logo">PS</div>
+            <button class="btn" onclick="showPage('profile')">👤 Profile</button>
+            <button class="btn" onclick="showPage('scoring')">🥊 Scoring</button>
+            <button class="btn" onclick="showPage('rules')">📋 Rules & Violations</button>
+            <button class="btn" onclick="showPage('about')">ℹ️ About</button>
+            <button class="btn logout-btn" onclick="doLogout()">🚪 Logout</button>
+        </div>
+    </div>
+
+    <!-- Profile Page -->
+    <div id="profile" class="page">
+        <div class="container">
+            <div class="header">
+                <h1>Profile</h1>
+                <button class="back-btn" onclick="showPage('home')">← Back</button>
+            </div>
+            <div class="profile-info">
+                <p><strong>Name:</strong> <span id="profileName">Guest User</span></p>
+                <p><strong>Role:</strong> Judge</p>
+                <p><strong>ID:</strong> PS001</p>
+                <p><strong>Status:</strong> Active</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rules Page -->
+    <div id="rules" class="page">
+        <div class="container">
+            <div class="header">
+                <h1>Rules & Violations</h1>
+                <button class="back-btn" onclick="showPage('home')">← Back</button>
+            </div>
+
+            <div class="section">
+                <h3>🟡 Light Violations</h3>
+                <div class="rule-item">1. [PDF se rule 1 yahan daal]</div>
+                <div class="rule-item">2. [PDF se rule 2 yahan daal]</div>
+                <div class="rule-item">3. [PDF se rule 3 yahan daal]</div>
+            </div>
+
+            <div class="section">
+                <h3>🟠 Moderate Violations</h3>
+                <div class="rule-item">1. [PDF se rule 1 yahan daal]</div>
+                <div class="rule-item">2. [PDF se rule 2 yahan daal]</div>
+                <div class="rule-item">3. [PDF se rule 3 yahan daal]</div>
+            </div>
+
+            <div class="section">
+                <h3>🔴 Serious Violations</h3>
+                <div class="rule-item">1. [PDF se rule 1 yahan daal]</div>
+                <div class="rule-item">2. [PDF se rule 2 yahan daal]</div>
+                <div class="rule-item">3. [PDF se rule 3 yahan daal]</div>
+            </div>
+
+            <div class="section">
+                <h3>⚫ Disqualification</h3>
+                <div class="rule-item">1. [PDF se rule 1 yahan daal]</div>
+                <div class="rule-item">2. [PDF se rule 2 yahan daal]</div>
+                <div class="rule-item">3. [PDF se rule 3 yahan daal]</div>
+            </div>
+
+            <div class="section">
+                <h3>⚖️ Penalty</h3>
+                <div class="rule-item">1. [PDF se rule 1 yahan daal]</div>
+                <div class="rule-item">2. [PDF se rule 2 yahan daal]</div>
+                <div class="rule-item">3. [PDF se rule 3 yahan daal]</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scoring Page -->
+    <div id="scoring" class="page">
+        <div class="container">
+            <div class="header">
+                <h1>Scoring</h1>
+                <button class="back-btn" onclick="showPage('home')">← Back</button>
+            </div>
+            <div class="timer" id="timer">02:00</div>
+            <div class="score-display">
+                <div class="score-box">
+                    <div class="name red">RED</div>
+                    <div class="score red" id="redScore">0</div>
+                </div>
+                <div class="score-box">
+                    <div class="name blue">BLUE</div>
+                    <div class="score blue" id="blueScore">0</div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="control-btn start-btn" onclick="startTimer()">Start</button>
+                <button class="control-btn stop-btn" onclick="stopTimer()">Stop</button>
+            </div>
+            <div class="section">
+                <h3>Judge Controls</h3>
+                <button class="control-btn judge-btn" onclick="addScore('red')">Red +1</button>
+                <button class="control-btn judge-btn" onclick="addScore('blue')">Blue +1</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <div class="container">
+            <div class="header">
+                <h1>About</h1>
+                <button class="back-btn" onclick="showPage('home')">← Back</button>
+            </div>
+            <div class="section">
+                <h3>Pencak Silat Scoring App</h3>
+                <p>Version 2.0</p>
+                <p>For Official Pencak Silat Competitions</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Splash Screen - 3 sec baad login dikhao
+        setTimeout(() => {
+            showPage('login');
+        }, 3000);
+
+        let timeLeft = 120;
+        let timerRunning = false;
+        let timerInterval;
+        let redScore = 0;
+        let blueScore = 0;
+        let currentUser = '';
+
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(page).classList.add('active');
+        }
+
+        function doLogin() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            if (user && pass) {
+                currentUser = user;
+                document.getElementById('profileName').textContent = user;
+                showPage('home');
+            } else {
+                alert('Username aur Password daalo');
+            }
+        }
+
+        function doLogout() {
+            currentUser = '';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            showPage('login');
+        }
+
+        function updateTimer() {
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            document.getElementById('timer').textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function startTimer() {
+            if (timerRunning) return;
+            timerRunning = true;
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimer();
+                if (timeLeft <= 0) stopTimer();
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            timerRunning = false;
+        }
+
+        function addScore(fighter) {
+            if (fighter === 'red') {
+                redScore++;
+                document.getElementById('redScore').textContent = redScore;
+            } else {
+                blueScore++;
+                document.getElementById('blueScore').textContent = blueScore;
+            }
+        }
+
+        updateTimer();
+    </script>
 </body>
-    </html>
+</html>
