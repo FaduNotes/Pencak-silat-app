@@ -1,156 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pencak Silat Info App</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
-body{background:#0f172a;color:#fff;overflow-x:hidden}
-.hidden{display:none!important}
-.fade-in{animation:fadeIn 0.4s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-#splash{position:fixed;inset:0;background:linear-gradient(135deg,#1e293b,#0f172a);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999}
-.logo{width:120px;height:120px;border-radius:30px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:3rem;font-weight:900;color:#0f172a;margin-bottom:20px;animation:pop 0.6s ease}
-#splash h1{font-size:1.8rem;color:#fbbf24;letter-spacing:2px}
-@keyframes pop{0%{transform:scale(0)}80%{transform:scale(1.1)}100%{transform:scale(1)}}
-.auth-container{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#1e293b,#0f172a)}
-.auth-box{width:100%;max-width:380px;background:#1e293b;border:1px solid #334155;border-radius:16px;padding:30px;box-shadow:0 10px 40px rgba(0,0,0,0.5)}
-.auth-box h2{text-align:center;color:#fbbf24;margin-bottom:25px;font-size:1.6rem}
-.input-group{margin-bottom:15px}
-.input-group label{display:block;margin-bottom:6px;color:#cbd5e1;font-size:0.9rem}
-.input-group input{width:100%;padding:12px 14px;border:1px solid #475569;border-radius:10px;background:#0f172a;color:#fff;font-size:1rem;outline:none}
-.input-group input:focus{border-color:#fbbf24}
-.btn{width:100%;padding:13px;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:0.2s}
-.btn:active{transform:scale(0.97)}
-.btn-primary{background:#fbbf24;color:#0f172a;margin-top:10px}
-.link{text-align:center;margin-top:15px;color:#94a3b8;font-size:0.9rem}
-.link span{color:#fbbf24;cursor:pointer;font-weight:600}
-.error{color:#ef4444;text-align:center;margin-top:10px;font-size:0.9rem;min-height:20px}
-#app{min-height:100vh;background:#0f172a}
-.header{background:#1e293b;padding:14px 16px;display:flex;align-items:center;gap:15px;border-bottom:1px solid #334155;position:sticky;top:0;z-index:50}
-.hamburger{width:28px;height:22px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}
-.hamburger span{height:3px;background:#fbbf24;border-radius:2px;transition:0.3s}
-.header h1{font-size:1.2rem;color:#fbbf24}
-.content{padding:20px;max-width:800px;margin:0 auto}
-#sidebar{position:fixed;top:0;left:-280px;width:280px;height:100%;background:#1e293b;border-right:1px solid #334155;z-index:100;transition:0.3s;padding-top:70px}
-#sidebar.active{left:0}
-.menu-item{padding:16px 20px;border-bottom:1px solid #334155;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:1rem}
-.menu-item:hover{background:#334155}
-#overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99;display:none}
-#overlay.active{display:block}
-.page{display:none}
-.page.active{display:block}
-.card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:20px;margin-bottom:16px}
-.card h2{color:#fbbf24;margin-bottom:12px;font-size:1.3rem}
-.card p{color:#cbd5e1;line-height:1.7;margin-bottom:10px}
-.card ul{padding-left:20px;color:#cbd5e1}
-.card li{margin-bottom:8px}
-.badge{display:inline-block;background:#334155;padding:6px 12px;border-radius:20px;font-size:0.85rem;margin:4px}
-.badge.gold{background:#fbbf24;color:#0f172a;font-weight:700}
-.profile-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #334155}
-.profile-row:last-child{border:none}
-.profile-label{color:#94a3b8}
-.profile-value{color:#fff;font-weight:600}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pencak Silat App</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #0d1117;
+            color: white;
+            padding: 12px;
+        }
+       .container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: #161b22;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #30363d;
+        }
+        h1 {
+            text-align: center;
+            color: #ffc107;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+       .menu-btn {
+            width: 100%;
+            padding: 16px;
+            margin: 8px 0;
+            background: #1f6feb;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+       .menu-btn:active { opacity: 0.6; }
+       .page { display: none; }
+        #home { display: block; }
+       .jury-container { max-width: 650px; margin: 0 auto; background: #161b22; padding: 20px; border-radius: 15px; border: 2px solid #30363d; }
+       .jury-container h1 { text-align: center; color: #f78166; margin-bottom: 15px; font-size: 30px; border: 2px solid #f78166; padding: 8px; border-radius: 10px; }
+       .jury-container select,.jury-container input { width: 100%; padding: 14px; margin: 6px 0; border-radius: 10px; border: 2px solid #30363d; background: #0d1117; color: white; font-size: 17px; }
+       .round-indicator { background: #0d1117; padding: 12px; border-radius: 10px; border: 3px solid #f78166; margin: 10px 0; text-align: center; font-size: 24px; font-weight: bold; color: #f78166; }
+       .privacy-badge { background: #9e6a03; color: white; padding: 8px 15px; border-radius: 8px; text-align: center; margin: 10px 0; font-size: 14px; font-weight: bold; }
+       .corner-box { background: #0d1117; padding: 15px; border-radius: 12px; border: 3px solid; margin: 12px 0; }
+       .red-box { border-color: #ff7b72; }
+       .blue-box { border-color: #79c0ff; }
+       .kp-box { border-color: #f0883e; background: linear-gradient(135deg, #2d1a0d 0%, #3d2415 100%); }
+       .corner-title { text-align: center; font-weight: bold; font-size: 22px; margin-bottom: 12px; }
+       .red-title { color: #ff7b72; }
+       .blue-title { color: #79c0ff; }
+       .kp-title { color: #f0883e; }
+       .action-total { text-align: center; font-size: 48px; font-weight: bold; margin: 12px 0; }
+       .hidden-score { filter: blur(8px); user-select: none; }
+       .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+       .kp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+       .action-btn { padding: 18px 5px; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; }
+       .action-btn:active { opacity: 0.6; }
+       .action-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+       .punch { background: #238636; color: white; }
+       .kick { background: #1f6feb; color: white; }
+       .penalty { background: #da3633; color: white; }
+       .warning { background: #9e6a03; color: white; }
+       .kp-btn { background: #f0883e; color: white; font-size: 16px; padding: 18px 5px; }
+       .kp-penalty { background: #da3633; color: white; }
+       .kp-warning { background: #9e6a03; color: white; }
+       .timer-box { background: #0d1117; padding: 15px; border-radius: 12px; border: 2px solid #30363d; margin: 15px 0; text-align: center; }
+       .timer-display { font-size: 48px; font-weight: bold; color: #f78166; margin: 10px 0; font-family: monospace; }
+       .timer-btn { padding: 12px 30px; margin: 5px; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; }
+       .start { background: #238636; color: white; }
+       .stop { background: #da3633; color: white; }
+       .reset { background: #6e7681; color: white; }
+       .round-btn { width: 100%; padding: 16px; background: #1f6feb; color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; margin: 8px 0; cursor: pointer; }
+       .finish-round-btn { width: 100%; padding: 20px; background: #238636; color: white; border: none; border-radius: 12px; font-size: 22px; font-weight: bold; margin-top: 15px; cursor: pointer; }
+       .finish-match-btn { width: 100%; padding: 20px; background: #da3633; color: white; border: none; border-radius: 12px; font-size: 22px; font-weight: bold; margin-top: 15px; cursor: pointer; }
+       .status { text-align: center; margin-top: 10px; min-height: 24px; font-weight: bold; font-size: 16px; }
+       .success { color: #3fb950; }
+       .history { margin-top: 15px; background: #0d1117; border-radius: 10px; padding: 12px; max-height: 300px; overflow-y: auto; border: 2px solid #30363d; display: none; }
+       .history.show { display: block; }
+       .history h3 { color: #f78166; font-size: 16px; margin-bottom: 8px; text-align: center; }
+       .history-item { font-size: 13px; padding: 8px; border-bottom: 1px solid #21262d; display: flex; justify-content: space-between; align-items: center; }
+       .delete-btn { background: #da3633; color: white; border: none; border-radius: 6px; padding: 4px 8px; font-size: 11px; cursor: pointer; margin-left: 8px; }
+       .round-badge { background: #1f6feb; color: white; padding: 3px 8px; border-radius: 5px; font-size: 11px; margin-right: 5px; }
+       .kp-badge { background: #f0883e; color: white; padding: 3px 8px; border-radius: 5px; font-size: 11px; margin-right: 5px; }
+       .final-result { background: #0d1117; padding: 20px; border-radius: 12px; border: 3px solid #3fb950; margin: 15px 0; text-align: center; display: none; }
+       .final-result.show { display: block; }
+       .final-title { font-size: 28px; font-weight: bold; color: #3fb950; margin-bottom: 15px; }
+       .final-score { font-size: 20px; margin: 8px 0; }
+       .winner { font-size: 32px; font-weight: bold; margin-top: 15px; }
+       .winner-red { color: #ff7b72; }
+       .winner-blue { color: #79c0ff; }
+       .winner-draw { color: #f78166; }
+       .locked-msg { color: #f78166; font-size: 12px; text-align: center; margin-top: 8px; font-style: italic; }
+       .judge-label { text-align: center; font-size: 14px; color: #8b949e; margin-top: 5px; font-style: italic; }
+       .kp-view-all { background: #f0883e; padding: 15px; border-radius: 10px; margin: 10px 0; text-align: center; font-weight: bold; }
+       .profile-card { background: #0d1117; padding: 20px; border-radius: 12px; border: 2px solid #30363d; margin: 15px 0; }
+       .profile-item { margin: 12px 0; font-size: 18px; }
+       .profile-label { color: #8b949e; }
+       .profile-value { color: #ffc107; font-weight: bold; }
+    </style>
 </head>
 <body>
-<div id="splash">
-  <div class="logo">PS</div>
-  <h1>PENCAK SILAT</h1>
-</div>
-<div id="auth" class="auth-container hidden">
-  <div class="auth-box fade-in">
-    <h2 id="authTitle">Login</h2>
-    <div class="input-group" id="nameGroup" style="display:none">
-      <label>Full Name</label>
-      <input type="text" id="nameInput" placeholder="Enter your name">
-    </div>
-    <div class="input-group">
-      <label>Mobile Number</label>
-      <input type="tel" id="numberInput" placeholder="10 digit number" maxlength="10">
-    </div>
-    <div class="input-group">
-      <label>Password</label>
-      <input type="password" id="passwordInput" placeholder="Enter password">
-    </div>
-    <div class="error" id="authError"></div>
-    <button class="btn btn-primary" onclick="handleAuth()">Login</button>
-    <div class="link">
-      <span id="toggleAuth" onclick="toggleAuthMode()">New user? Sign Up</span>
-    </div>
-  </div>
-</div>
-<div id="app" class="hidden">
-  <div class="header">
-    <div class="hamburger" onclick="toggleSidebar()">
-      <span></span><span></span><span></span>
-    </div>
-    <h1 id="pageTitle">Profile</h1>
-  </div>
-  <div id="sidebar">
-    <div class="menu-item" onclick="showPage('profile')">👤 Profile</div>
-    <div class="menu-item" onclick="showPage('rules')">📜 Game Rules</div>
-    <div class="menu-item" onclick="showPage('achievements')">🏆 Achievements</div>
-    <div class="menu-item" onclick="logout()">🚪 Logout</div>
-  </div>
-  <div id="overlay" onclick="toggleSidebar()"></div>
-  <div class="content">
-    <div id="profile" class="page active fade-in">
-      <div class="card">
-        <h2>My Profile</h2>
-        <div class="profile-row">
-          <span class="profile-label">Name</span>
-          <span class="profile-value" id="profileName">-</span>
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home" class="page">
+            <h1>🥋 PENCAK SILAT</h1>
+            <button class="menu-btn" onclick="showPage('profile')">Profile</button>
+            <button class="menu-btn" onclick="showPage('jury')">Jury Panel Score</button>
+            <button class="menu-btn" onclick="showPage('about')">About</button>
         </div>
-        <div class="profile-row">
-          <span class="profile-label">Mobile Number</span>
-          <span class="profile-value" id="profileNumber">-</span>
+
+        <!-- Profile Page -->
+        <div id="profile" class="page">
+            <h1>Profile</h1>
+            <div class="profile-card">
+                <div class="profile-item">
+                    <span class="profile-label">Name:</span>
+                    <span class="profile-value">Muhammad</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">Date:</span>
+                    <span class="profile-value">25/05/2026</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">App:</span>
+                    <span class="profile-value">Pencak Silat Scoring</span>
+                </div>
+            </div>
+            <button class="menu-btn" onclick="showPage('home')">Back to Menu</button>
         </div>
-        <div class="profile-row">
-          <span class="profile-label">Member Since</span>
-          <span class="profile-value" id="profileDate">-</span>
+
+        <!-- Jury Panel Page -->
+        <div id="jury" class="page">
+            <div class="jury-container">
+                <h1>JURY PANEL</h1>
+                <div class="round-indicator" id="roundIndicator">ROUND 1 / 3</div>
+
+                <select id="juryId" onchange="changeJudge()">
+                    <option value="1">Jury 1</option>
+                    <option value="2">Jury 2</option>
+                    <option value="3">Jury 3</option>
+                    <option value="KP">KP Judge - Admin</option>
+                </select>
+                <div class="judge-label" id="judgeLabel">Punch +1, Kick +2</div>
+                <div class="privacy-badge" id="privacyBadge">🔒 PRIVATE MODE: Sirf apna score dikhega</div>
+                <input type="text" id="matchNo" placeholder="Match No - " value="MATCH001">
+
+                <div class="corner-box red-box">
+                    <div class="corner-title red-title">RED CORNER</div>
+                    <div class="action-total red-title" id="redTotal">0</div>
+                    <div class="action-grid">
+                        <button class="action-btn punch" onclick="addAction('red', 1, 'Punch')">Punch +1</button>
+                        <button class="action-btn kick" onclick="addAction('red', 2, 'Kick')">Kick +2</button>
+                        <button class="action-btn penalty" onclick="addAction('red', -1, 'Penalty')">Penalty -1</button>
+                        <button class="action-btn warning" onclick="addAction('red', -5, 'Warning')">Warning -5</button>
+                    </div>
+                </div>
+
+                <div class="corner-box blue-box">
+                    <div class="corner-title blue-title">BLUE CORNER</div>
+                    <div class="action-total blue-title" id="blueTotal">0</div>
+                    <div class="action-grid">
+                        <button class="action-btn punch" onclick="addAction('blue', 1, 'Punch')">Punch +1</button>
+                        <button class="action-btn kick" onclick="addAction('blue', 2, 'Kick')">Kick +2</button>
+                        <button class="action-btn penalty" onclick="addAction('blue', -1, 'Penalty')">Penalty -1</button>
+                        <button class="action-btn warning" onclick="addAction('blue', -5, 'Warning')">Warning -5</button>
+                    </div>
+                </div>
+
+                <div class="corner-box kp-box" id="kpSection" style="display:none;">
+                    <div class="corner-title kp-title">💥 KNOCKDOWN (KP)</div>
+                    <div class="action-total kp-title" id="kpTotal">0</div>
+                    <div class="kp-view-all" id="kpViewAll">👁️ KP MODE: Sabka Score Visible</div>
+                    <div class="kp-grid">
+                        <button class="action-btn kp-btn" onclick="addKP('red', 3)">RED GIRAYA +3</button>
+                        <button class="action-btn kp-btn" onclick="addKP('blue', 3)">BLUE GIRAYA +3</button>
+                        <button class="action-btn kp-penalty" onclick="addKP('red', -1)">RED PENALTY -1</button>
+                        <button class="action-btn kp-penalty" onclick="addKP('blue', -1)">BLUE PENALTY -1</button>
+                        <button class="action-btn kp-warning" onclick="addKP('red', -5)">RED WARNING -5</button>
+                        <button class="action-btn kp-warning" onclick="addKP('blue', -5)">BLUE WARNING -5</button>
+                    </div>
+                </div>                <div class="timer-box">
+                    <div style="font-size:18px; color:#8b949e;">Timer</div>
+                    <div class="timer-display" id="timer">00:00</div>
+                    <button class="timer-btn start" onclick="startTimer()">Start</button>
+                    <button class="timer-btn stop" onclick="stopTimer()">Stop</button>
+                    <button class="timer-btn reset" onclick="resetTimer()">Reset</button>
+                </div>
+
+                <button class="round-btn" onclick="toggleHistory()">History of Point</button>
+                <div class="history" id="historyBox">
+                    <h3>📜 Complete Match History</h3>
+                    <div id="historyList"><div style="text-align:center; color:#8b949e;">Koi action nahi</div></div>
+                    <div class="locked-msg" id="lockedMsg" style="display:none;">🔒 Match finished - History locked</div>
+                </div>
+
+                <div class="final-result" id="finalResult">
+                    <div class="final-title">🏆 FINAL RESULT</div>
+                    <div class="final-score" id="round1Score"></div>
+                    <div class="final-score" id="round2Score"></div>
+                    <div class="final-score" id="round3Score"></div>
+                    <div class="final-score" id="totalScore" style="font-size:24px; margin-top:15px;"></div>
+                    <div class="winner" id="winnerText"></div>
+                </div>
+
+                <button class="finish-round-btn" id="finishRoundBtn" onclick="finishRound()">ROUND FINISH</button>
+                <button class="finish-match-btn" onclick="resetMatch()">FINISH MATCH</button>
+                <div class="status" id="status"></div>
+                <button class="menu-btn" onclick="showPage('home')" style="margin-top: 20px;">Back to Menu</button>
+            </div>
         </div>
-      </div>
-    </div>
-    <div id="rules" class="page">
-      <div class="card">
-        <h2>What is Pencak Silat?</h2>
-        <p>Pencak Silat is a traditional Indonesian martial art. It combines striking, grappling, and weaponry. In sport format, it has 2 main categories: Tanding and Seni.</p>
-      </div>
-      <div class="card">
-        <h2>Tanding - Match Rules</h2>
-        <ul>
-          <li><b>Duration:</b> 3 rounds × 2 minutes, 1 min rest</li>
-          <li><b>Scoring Area:</b> 10m × 10m mat</li>
-          <li><b>Points:</b> Punch = 1, Kick = 2, Throw = 3</li>
-          <li><b>Win by:</b> Highest points, KO, or DQ</li>
-        </ul>
-      </div>
-    </div>
-    <div id="achievements" class="page">
-      <div class="card">
-        <h2>Your Achievements</h2>
-        <div style="margin-top:15px">
-          <span class="badge gold">🎯 First Login</span>
-          <span class="badge" id="badgeRules">📚 Rule Master</span>
-          <span class="badge" id="badgeExplorer">🧭 Explorer</span>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <h1>About</h1>
+            <div class="profile-card">
+                <p style="line-height: 1.6; font-size: 16px;">
+                    Ye Pencak Silat Scoring App hai. Isme 3 Jury + KP Judge ka system hai.
+                    Har Jury apna score de sakta hai. KP sabka total dekh sakta hai.
+                    <br><br>
+                    <strong>Rules:</strong><br>
+                    Punch = +1 Point<br>
+                    Kick = +2 Points<br>
+                    Knockdown = +3 Points (KP Only)<br>
+                    Penalty = -1 Point<br>
+                    Warning = -5 Points
+                </p>
+            </div>
+            <button class="menu-btn" onclick="showPage('home')">Back to Menu</button>
         </div>
-      </div>
     </div>
-  </div>
-</div>
-<script>
-let isLogin=true;let currentUser=null;
-setTimeout(()=>{document.getElementById('splash').style.display='none';document.getElementById('auth').classList.remove('hidden');checkAutoLogin()},3000);
-function checkAutoLogin(){const user=localStorage.getItem('ps_currentUser');if(user){currentUser=JSON.parse(user);showApp()}}
-function toggleAuthMode(){isLogin=!isLogin;document.getElementById('authTitle').innerText=isLogin?'Login':'Sign Up';document.getElementById('nameGroup').style.display=isLogin?'none':'block';document.querySelector('.btn-primary').innerText=isLogin?'Login':'Sign Up';document.getElementById('toggleAuth').innerText=isLogin?'New user? Sign Up':'Already have account? Login';document.getElementById('authError').innerText=''}
-function handleAuth(){const name=document.getElementById('nameInput').value.trim();const number=document.getElementById('numberInput').value.trim();const password=document.getElementById('passwordInput').value.trim();const error=document.getElementById('authError');if(!number||number.length!==10||isNaN(number)){error.innerText='Enter valid 10 digit number';return}if(!password||password.length<4){error.innerText='Password must be 4+ characters';return}let users=JSON.parse(localStorage.getItem('ps_users')||'{}');if(isLogin){if(!users[number]||users[number].password!==password){error.innerText='Invalid number or password';return}currentUser=users[number]}else{if(!name){error.innerText='Enter your name';return}if(users[number]){error.innerText='Number already registered';return}currentUser={name:name,number:number,password:password,joined:new Date().toLocaleDateString()};users[number]=currentUser;localStorage.setItem('ps_users',JSON.stringify(users))}localStorage.setItem('ps_currentUser',JSON.stringify(currentUser));showApp()}
-function showApp(){document.getElementById('auth').classList.add('hidden');document.getElementById('app').classList.remove('hidden');loadProfile()}
-function loadProfile(){document.getElementById('profileName').innerText=currentUser.name;document.getElementById('profileNumber').innerText=currentUser.number;document.getElementById('profileDate').innerText=currentUser.joined}
-function toggleSidebar(){document.getElementById('sidebar').classList.toggle('active');document.getElementById('overlay').classList.toggle('active')}
-function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(page).classList.add('active');document.getElementById('pageTitle').innerText=page.charAt(0).toUpperCase()+page.slice(1);toggleSidebar();if(page==='rules')document.getElementById('badgeRules').className='badge gold';if(page==='achievements')document.getElementById('badgeExplorer').className='badge gold'}
-function logout(){localStorage.removeItem('ps_currentUser');location.reload()}
-</script>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.style.display = 'none';
+            });
+            document.getElementById(pageId).style.display = 'block';
+            if(pageId === 'jury') {
+                changeJudge();
+            }
+        }
+
+        // Jury Panel Code
+        const MAX_ROUNDS = 3;
+        let currentRound = 1;
+        let currentJudge = '1';
+        let roundData = {
+            1: { jury1: { red: 0, blue: 0 }, jury2: { red: 0, blue: 0 }, jury3: { red: 0, blue: 0 }, kp: { red: 0, blue: 0, kp_red: 0, kp_blue: 0 }, actions: [], submitted: false },
+            2: { jury1: { red: 0, blue: 0 }, jury2: { red: 0, blue: 0 }, jury3: { red: 0, blue: 0 }, kp: { red: 0, blue: 0, kp_red: 0, kp_blue: 0 }, actions: [], submitted: false },
+            3: { jury1: { red: 0, blue: 0 }, jury2: { red: 0, blue: 0 }, jury3: { red: 0, blue: 0 }, kp: { red: 0, blue: 0, kp_red: 0, kp_blue: 0 }, actions: [], submitted: false }
+        };
+        let timerInterval = null;
+        let seconds = 0;
+        let matchFinished = false;
+
+        function getCurrentRoundData() { return roundData[currentRound]; }
+
+        function changeJudge() {
+            currentJudge = document.getElementById('juryId').value;
+            const kpSection = document.getElementById('kpSection');
+            const judgeLabel = document.getElementById('judgeLabel');
+            const privacyBadge = document.getElementById('privacyBadge');
+
+            if(currentJudge === 'KP') {
+                kpSection.style.display = 'block';
+                judgeLabel.textContent = 'KP ADMIN: Knockdown +3, Penalty -1, Warning -5';
+                privacyBadge.textContent = '👁️ ADMIN MODE: Sabka Score Visible';
+                privacyBadge.style.background = '#f0883e';
+                document.querySelectorAll('.punch,.kick,.penalty,.warning').forEach(btn => btn.disabled = true);
+            } else {
+                kpSection.style.display = 'none';
+                judgeLabel.textContent = `Jury ${currentJudge}: Punch +1, Kick +2, Penalty -1, Warning -5`;
+                privacyBadge.textContent = `🔒 PRIVATE MODE: Sirf Jury ${currentJudge} ka score dikhega`;
+                privacyBadge.style.background = '#9e6a03';
+                document.querySelectorAll('.punch,.kick,.penalty,.warning').forEach(btn => btn.disabled = false);
+            }
+            updateDisplay();
+        }
+
+        function addAction(fighter, points, actionName) {
+            if(matchFinished || currentJudge === 'KP') return;
+            const data = getCurrentRoundData();
+            const juryKey = `jury${currentJudge}`;
+            data[juryKey][fighter] += points;
+            data.actions.push({
+                id: Date.now() + Math.random(),
+                round: currentRound,
+                judge: currentJudge,
+                fighter: fighter,
+                points: points,
+                action: actionName,
+                time: new Date().toLocaleTimeString('en-IN', {hour: '2-digit', minute:'2-digit', second:'2-digit'})
+            });
+            updateDisplay();
+        }
+
+        function addKP(fighter, points) {
+            if(matchFinished || currentJudge!== 'KP') return;
+            const data = getCurrentRoundData();
+            const kpKey = fighter === 'red'? 'kp_red' : 'kp_blue';
+            data.kp[kpKey] += points;
+            data.kp[fighter] += points;
+            let actionName = 'Knockdown';
+            if(points === -1) actionName = 'KP Penalty';
+            if(points === -5) actionName = 'KP Warning';
+            data.actions.push({
+                id: Date.now() + Math.random(),
+                round: currentRound,
+                judge: 'KP',
+                fighter: fighter,
+                points: points,
+                action: actionName,
+                time: new Date().toLocaleTimeString('en-IN', {hour: '2-digit', minute:'2-digit', second:'2-digit'})
+            });
+            updateDisplay();
+        }
+
+        function deleteAction(actionId, round) {
+            if(matchFinished || roundData[round].submitted) return;
+            const data = roundData[round];
+            const actionIndex = data.actions.findIndex(a => a.id === actionId);
+            if(actionIndex!== -1) {
+                const action = data.actions[actionIndex];
+                if(action.judge === 'KP') {
+                    const kpKey = action.fighter === 'red'? 'kp_red' : 'kp_blue';
+                    data.kp[kpKey] -= action.points;
+                    data.kp[action.fighter] -= action.points;
+                } else {
+                    const juryKey = `jury${action.judge}`;
+                    data[juryKey][action.fighter] -= action.points;
+                }
+                data.actions.splice(actionIndex, 1);
+                updateDisplay();
+            }
+        }
+
+        function resetMatch() {
+            roundData = {
+                1: { jury1: { red: 0, blue: 0 }, jury2: { red: 0, blue: 0 }, jury3: { red: 0, blue: 0 }, kp: { red: 0, blue: 0, kp_red: 0, kp_blue: 0 }, actions: [], submitted: false },
+                2: { jury1: { red: 0, blue: 0 }, jury2: { red: 0, blue: 0 }, jury3: { red: 0, blue: 0 }, kp: { red: 0, blue: 0, kp_red: 0, kp_blue: 0 }, actions: [], submitted: false },
+                3: { jury1: { red: 0, blue: 0 }, jury2: { red: 0, blue: 0 }, jury3: { red: 0, blue: 0 }, kp: { red: 0, blue: 0, kp_red: 0, kp_blue: 0 }, actions: [], submitted: false }
+            };
+            currentRound = 1; matchFinished = false; resetTimer();
+            document.getElementById('finalResult').classList.remove('show');
+            document.getElementById('finishRoundBtn').style.display = 'block';
+            document.getElementById('lockedMsg').style.display = 'none';
+            changeJudge();
+            document.getElementById('status').innerHTML = '🥊 New Match Started!';
+            setTimeout(() => document.getElementById('status').innerHTML = '', 2000);
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            const data = getCurrentRoundData();
+            const redTotalEl = document.getElementById('redTotal');
+            const blueTotalEl = document.getElementById('blueTotal');
+            const kpTotalEl = document.getElementById('kpTotal');
+
+            if(currentJudge === 'KP') {
+                let totalRed = data.jury1.red + data.jury2.red + data.jury3.red + data.kp.red;
+                let totalBlue = data.jury1.blue + data.jury2.blue + data.jury3.blue + data.kp.blue;
+                redTotalEl.textContent = totalRed;
+                blueTotalEl.textContent = totalBlue;
+                kpTotalEl.textContent = data.kp.kp_red + data.kp.kp_blue;
+            } else {
+                const juryKey = `jury${currentJudge}`;
+                redTotalEl.textContent = data[juryKey].red;
+                blueTotalEl.textContent = data[juryKey].blue;
+                kpTotalEl.textContent = '???';
+            }
+
+            document.getElementById('roundIndicator').textContent = `ROUND ${currentRound} / ${MAX_ROUNDS}`;
+            document.getElementById('finishRoundBtn').textContent = `ROUND ${currentRound} FINISH`;
+
+            const historyList = document.getElementById('historyList');
+            let allActions = [];
+            for(let r = 1; r <= MAX_ROUNDS; r++) allActions = allActions.concat(roundData[r].actions);
+            if(currentJudge!== 'KP') {
+                allActions = allActions.filter(a => a.judge === currentJudge);
+            }
+            if(allActions.length === 0) {
+                historyList.innerHTML = '<div style="text-align:center; color:#8b949e;">Koi action nahi</div>';
+                return;
+            }
+            historyList.innerHTML = allActions.slice().reverse().map(a => {
+                const canDelete =!matchFinished &&!roundData[a.round].submitted && a.judge === currentJudge;
+                const deleteButton = canDelete? `<button class="delete-btn" onclick="deleteAction(${a.id}, ${a.round})">❌</button>` : '';
+                const badge = a.judge === 'KP'? '<span class="kp-badge">KP</span>' : `<span class="round-badge">J${a.judge}</span>`;
+                return `<div class="history-item"><div>${badge}<span style="color:${a.fighter === 'red'? '#ff7b72' : '#79c0ff'}">${a.fighter.toUpperCase()}: ${a.points > 0? '+' : ''}${a.points} ${a.action}</span><span style="color:#8b949e; font-size:11px; margin-left:5px;">${a.time}</span></div>${deleteButton}</div>`;
+            }).join('');
+            document.getElementById('lockedMsg').style.display = matchFinished? 'block' : 'none';
+        }
+
+        function startTimer() {
+            if(timerInterval || matchFinished) return;
+            timerInterval = setInterval(() => {
+                seconds++;
+                let mins = Math.floor(seconds / 60);
+                let secs = seconds % 60;
+                document.getElementById('timer').textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+
+        function resetTimer() {
+            stopTimer();
+            seconds = 0;
+            document.getElementById('timer').textContent = '00:00';
+        }
+
+        function toggleHistory() {
+            document.getElementById('historyBox').classList.toggle('show');
+        }
+
+        function finishRound() {
+            if(matchFinished) return;
+            roundData[currentRound].submitted = true;
+            if(currentRound < MAX_ROUNDS) {
+                currentRound++;
+                document.getElementById('status').innerHTML = `✅ Round ${currentRound-1} Complete!`;
+                setTimeout(() => document.getElementById('status').innerHTML = '', 2000);
+                updateDisplay();
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function showFinalResult() {
+            matchFinished = true;
+            let totalRed = 0, totalBlue = 0;
+            for(let r = 1; r <= MAX_ROUNDS; r++) {
+                const d = roundData[r];
+                const red = d.jury1.red + d.jury2.red + d.jury3.red + d.kp.red;
+                const blue = d.jury1.blue + d.jury2.blue + d.jury3.blue + d.kp.blue;
+                totalRed += red;
+                totalBlue += blue;
+                document.getElementById(`round${r}Score`).innerHTML = `Round ${r}: <span style="color:#ff7b72">RED ${red}</span> - <span style="color:#79c0ff">BLUE ${blue}</span>`;
+            }
+            document.getElementById('totalScore').innerHTML = `TOTAL: <span style="color:#ff7b72">RED ${totalRed}</span> - <span style="color:#79c0ff">BLUE ${totalBlue}</span>`;
+            let winnerText = '';
+            if(totalRed > totalBlue) winnerText = '<span class="winner-red">🔴 RED CORNER WINS!</span>';
+            else if(totalBlue > totalRed) winnerText = '<span class="winner-blue">🔵 BLUE CORNER WINS!</span>';
+            else winnerText = '<span class="winner-draw">🤝 DRAW!</span>';
+            document.getElementById('winnerText').innerHTML = winnerText;
+            document.getElementById('finalResult').classList.add('show');
+            document.getElementById('finishRoundBtn').style.display = 'none';
+        }
+    </script>
 </body>
-            </html>
+</html>
